@@ -1,0 +1,8 @@
+# Step 1: Ignore everything
+*
+
+# Step 2: Unignore all files with an extension (e.g., .c, .cpp, .py)
+!*.*
+
+# Step 3: Unignore directories so Git can scan through them
+!*/
