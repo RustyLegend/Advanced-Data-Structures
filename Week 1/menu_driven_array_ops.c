@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<stdlib.h>
 #define MAX 100
 
 void read_array(int arr[]);
@@ -22,7 +21,7 @@ int main()
 
     while(1)
     {
-        printf("\n------------OPERATIONS------------\n");
+        printf("\n------------ARRAY OPERATIONS------------\n");
         printf("Current Array: ");
         print_array(arr);
         printf("\n");
