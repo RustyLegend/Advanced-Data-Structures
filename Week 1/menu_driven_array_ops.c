@@ -109,9 +109,6 @@ void insert_at_position(int arr[], int pos, int val)
     
     arr[pos] = val;
     n++;
-
-    printf("\nAfter insertion: ");
-    print_array(arr);
 }
 
 void delete_at_position(int arr[], int pos)
@@ -120,9 +117,6 @@ void delete_at_position(int arr[], int pos)
         arr[i] = arr[i+1];
     
     n--;
-
-    printf("\nAfter deletion: ");
-    print_array(arr);
 }
 
 int search(int arr[], int key)
