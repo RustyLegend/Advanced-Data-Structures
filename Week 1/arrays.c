@@ -2,11 +2,11 @@
 #include<stdlib.h>
 #define MAX 100
 
-void read_array(int arr[], int n);
-void print_array(int arr[], int n);
-void insert_at_position(int arr[], int pos, int val, int n);
-void delete_at_position(int arr[], int pos, int n);
-int search(int arr[], int key, int n);
+void read_array(int arr[]);
+void print_array(int arr[]);
+void insert_at_position(int arr[], int pos, int val);
+void delete_at_position(int arr[], int pos);
+int search(int arr[], int key);
 
 int n;
 
@@ -18,15 +18,17 @@ int main()
     printf("Enter no.of elements you want to enter (<= 100): ");
     scanf("%d", &n);
 
-    read_array(arr, n);
+    read_array(arr);
 
     while(1)
     {
         printf("\n------------OPERATIONS------------\n");
+        printf("Current Array: ");
+        print_array(arr);
+        printf("\n");
         printf("1. Insert at any position.\n");
         printf("2. Delete at any position.\n");
         printf("3. Search for an element (Linear search).\n");
-        printf("4. Print current array.\n");
         printf("-1. Exit.\n");
         scanf("%d", &ch);    
         
@@ -38,84 +40,93 @@ int main()
             case 1:
                 int insert_pos;
                 int insert_val;
-                printf("Enter a position. (0 - %d): ", n-1);
+                printf("\nEnter a position. (0 - %d): ", n-1);
                 scanf("%d", &insert_pos);
+                if(insert_pos < 0 || insert_pos >= n)
+                {
+                    printf("\nInvalid array position\n");
+                    break;
+                }
                 printf("Enter the value to insert at position %d: ", insert_pos);
                 scanf("%d", &insert_val);
-                insert_at_position(arr, insert_pos, insert_val, n);
+                insert_at_position(arr, insert_pos, insert_val);
                 break;
 
             case 2:
                 int delete_pos;
-                printf("Enter a position. (0 - %d): ", n-1);
+                printf("\nEnter a position. (0 - %d): ", n-1);
                 scanf("%d", &delete_pos);
-                delete_at_position(arr, delete_pos, n);
+                if(delete_pos < 0 || delete_pos >= n)
+                {
+                    printf("\nInvalid array position\n");
+                    break;
+                }
+                delete_at_position(arr, delete_pos);
                 break;
 
             case 3:
                 int key;
-                printf("Enter key to search: ");
+                printf("\nEnter key to search: ");
                 scanf("%d", &key);
-                int index = search(arr, key, n);
+                int index = search(arr, key);
 
                 if(index == -1)
-                    printf("Values doesn't exist in array");
+                    printf("\nValue doesn't exist in array\n");
                 else
-                    printf("Value at index %d", index);
+                    printf("\nValue at index %d\n", index);
 
-                break;
-
-            case 4:
-                printf("Current array: \n");
-                print_array(arr, n);
                 break;
 
             default:
-                printf("Enter valid value.\n");
+                printf("\nEnter valid value.\n");
                 break;
         }
     }
 }
 
-void read_array(int arr[], int n)
+void read_array(int arr[])
 {
+    printf("\n");
     for(int i = 0 ; i < n ; i++)
     {
         printf("Enter element %d: ", i+1);
         scanf("%d", &arr[i]);
     }
+    printf("\n");
 }
 
-void print_array(int arr[], int n)
+void print_array(int arr[])
 {
+    printf("\n");
     for(int i = 0 ; i < n ; i++)
         printf("%d ", arr[i]);
+    printf("\n");
 }
 
-void insert_at_position(int arr[], int pos, int val, int n)
+void insert_at_position(int arr[], int pos, int val)
 {
-    for(int i = n ; i <= pos ; i--)
-        arr[i-1] = arr[i];
+    for(int i = n ; i > pos ; i--)
+        arr[i] = arr[i-1];
     
     arr[pos] = val;
     n++;
 
-    printf("After insertion: \n");
-    print_array(arr, n);
+    printf("\nAfter insertion: ");
+    print_array(arr);
 }
 
-void delete_at_position(int arr[], int pos, int n)
+void delete_at_position(int arr[], int pos)
 {
-    for(int i = n-1 ; i >= pos ; i--)
-        arr[i-1] = arr[i];
+    for(int i = pos ; i < n-1 ; i++)
+        arr[i] = arr[i+1];
     
     n--;
 
-    printf("After deletion: ");
-    print_array(arr, n);
+    printf("\nAfter deletion: ");
+    print_array(arr);
 }
 
-int search(int arr[], int key, int n)
+int search(int arr[], int key)
 {
     for(int i = 0 ; i < n ; i++)
     {
